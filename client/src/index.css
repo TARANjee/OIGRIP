@@ -1,0 +1,66 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Poppins";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+overflow-x: hidden;
+}
+
+/* Navbar */
+
+.nav-link {
+  color: black;
+}
+
+.navbar-brand {
+  color: #e12301;
+  font-weight: bold;
+}
+
+.piz1,
+.piz2 {
+  color: #ebc48a;
+}
+
+
+
+/* pizza.js */
+
+.card {
+  margin: auto;
+  margin-bottom: 3rem;
+  max-width: 20rem;
+
+}
+
+/* Banner */
+
+.banner-back {
+  background-image: url('https://external-preview.redd.it/mfOQ0eUPj3SldsPGqHDsSfhCpo-uHTPpJfXVEpEu5z0.jpg?auto=webp&s=2e358d7534e3b1ef9912e2f51ea71e85c092510f');
+  height:360px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.font-italic {
+  color: #dba24a;
+}
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.3); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  display: flex;
+  height: 360px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+ 
+}
+.bg-text div h1{
+  color: #e12301;
+}

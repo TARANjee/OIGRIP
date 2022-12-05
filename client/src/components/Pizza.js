@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../actions/cartAction'
 
 const Pizza = ({ pizza }) => {
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState(1)
     const [varient, setVarient] = useState('small')
+    const dispatch = useDispatch()
+    const addItemsInCart = () => {
+        dispatch(addToCart(pizza, quantity, varient))
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -18,7 +24,7 @@ const Pizza = ({ pizza }) => {
         setQuantity(quantity - 1)
     }
     return (
-        <div className="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div className="card item p-4 ">
             <div onClick={handleShow}>
                 <img className="card-img-top" src={pizza.image} alt={pizza.name} />
                 <h5 className="mt-md-2 card-title ">{pizza.name}</h5>
@@ -36,19 +42,22 @@ const Pizza = ({ pizza }) => {
                 <div className='d-flex flex-column p-2  '>
                     <p>Quantity</p>
                     <div className='d-flex'>
-                        <button className='btn btn-danger' disabled={quantity === 1} onClick={decrementQuantity} >-</button>
-                        <p className='m-2'>{quantity}</p>
-                        <button className='btn btn-danger' onClick={incrementQuantity}>+</button>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" className="btn btn-danger" disabled={quantity === 1} onClick={decrementQuantity}>-</button>
+                            <button disabled type="button" className="btn btn-danger">{quantity}</button>
+                            <button type="button" className='btn btn-danger' onClick={incrementQuantity}>+</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
 
 
             {/* <h6 className="card-subtitle mb-2 text-muted">{pizza.description}</h6> */}
-            <button className='btn btn-danger d-flex justify-content-center'>
+            <button onClick={addItemsInCart} className='btn btn-danger d-flex justify-content-center'>
                 <div className='mr-2'>Add to cart</div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                   Add to cart <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">
+                    Add to cart <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                 </svg>
             </button>
 
@@ -58,14 +67,14 @@ const Pizza = ({ pizza }) => {
                 <Modal.Header >
                     <Modal.Title>{pizza.name}</Modal.Title>
 
-                    <svg onClick={handleClose} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <svg onClick={handleClose} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg>
                 </Modal.Header>
 
 
                 <Modal.Body >
-                    <img src={pizza.image} alt={pizza.name} />
+                    <img className='card-img-top' src={pizza.image} alt={pizza.name} />
 
                     <p>{pizza.description}</p>
                     <h4 className='font-weight-bold mt-1 '> ₹{pizza.prices[0][varient] * [quantity]}</h4>
@@ -82,9 +91,9 @@ const Pizza = ({ pizza }) => {
 
 
                 <Modal.Footer>
-                    <Button variant="success">
+                    <Button variant="danger" onClick={addItemsInCart} >
                         Add to cart
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                         </svg>
                     </Button>

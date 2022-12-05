@@ -1,17 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import Homescreen from './screens/Homescreen';
-import Banner from './components/Banner';
-
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import CartScreen from './screens/CartScreen';
 
 function App() {
   return (
-    <div className='App'>
+    <BrowserRouter>
       <Navbar />
-      <Banner />
-      <Homescreen />
-    </div>
+      <Routes >
+        <Route path='/' element={<Homescreen />} />
+        <Route path='/cart' element={<CartScreen />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

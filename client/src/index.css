@@ -1,12 +1,14 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
 
 body {
   margin: 0;
   font-family: "Poppins";
+  background-color: #F2F2F2;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -32,25 +34,40 @@ overflow-x: hidden;
 .card {
   margin: auto;
   margin-bottom: 3rem;
-  max-width: 20rem;
-
+  max-width: 22rem;
+  transition: transform .2s; 
 }
 
+.card:hover {
+  transform: scale(1.1);
+}
 /* Banner */
 
 .banner-back {
-  background-image: url('https://external-preview.redd.it/mfOQ0eUPj3SldsPGqHDsSfhCpo-uHTPpJfXVEpEu5z0.jpg?auto=webp&s=2e358d7534e3b1ef9912e2f51ea71e85c092510f');
-  height:360px;
+  background-image: url('https://media.istockphoto.com/id/1133727757/photo/picking-slice-of-pepperoni-pizza.jpg?s=170667a&w=0&k=20&c=RQaY3HkTEB66aq2g78QasyWa8CRYb6LhrFsJES0McWM=');
+  height: 360px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.main-banner {
+  background-image: url('https://thumbs.dreamstime.com/b/halloween-party-food-corner-border-over-white-wood-banner-background-copy-space-halloween-party-food-corner-border-over-195646545.jpg');
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .font-italic {
   color: #dba24a;
 }
+
 .bg-text {
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.3); /* Black w/opacity/see-through */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
   display: flex;
@@ -59,8 +76,33 @@ overflow-x: hidden;
   align-items: center;
   padding: 20px;
   text-align: center;
- 
+  font-family: 'Rubik Distressed', cursive;
 }
-.bg-text div h1{
+
+.bg-text div h1 {
   color: #e12301;
+}
+
+/* cartItem */
+
+.item,
+.cart-detail {
+  width: 100%;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px #c1b8b8;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.cart-margin {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.cart-detail {
+  width: 100%;
+  padding: 20px;
+  box-shadow: 2px 2px 2px 2px #c1b8b8;
+  border-radius: 5px;
+  background-color: white;
 }

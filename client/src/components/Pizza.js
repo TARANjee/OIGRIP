@@ -44,7 +44,7 @@ const Pizza = ({ pizza }) => {
                     <div className='d-flex'>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" className="btn btn-danger" disabled={quantity === 1} onClick={decrementQuantity}>-</button>
-                            <button disabled type="button" className="btn btn-danger">{quantity}</button>
+                            <p className="m-2 text-danger ">{quantity}</p>
                             <button type="button" className='btn btn-danger' onClick={incrementQuantity}>+</button>
                         </div>
                         

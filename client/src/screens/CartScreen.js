@@ -6,7 +6,10 @@ import CartItem from '../components/CartItem'
 const Cart = () => {
   const cartState = useSelector(state => state.cartReducer)
   const cartItems = cartState.cartItems
-
+  let subTotal = cartItems.reduce((total, item) => total + item.price, 0)
+  let discount = Math.round(subTotal * (10 / 100));
+  let taxes = Math.round(subTotal * (18 / 100));
+  let grandTotal = subTotal + taxes - discount
   return (
     <div className='cart-margin' >
       {/* <Banner /> */}
@@ -28,9 +31,8 @@ const Cart = () => {
             </div>
             <div>
               {cartItems.map(item => (
-                <CartItem  item={item} />
+                <CartItem item={item} />
               ))}
-
             </div>
           </div>
 
@@ -58,19 +60,19 @@ const Cart = () => {
               <div className='mt-4 cart-detail' >
                 <div className='d-flex justify-content-between p-2'  >
                   <h6>Sub Total</h6>
-                  <h6>₹3192</h6>
+                  <h6>₹{subTotal}</h6>
                 </div>
                 <div className='d-flex justify-content-between p-2'  >
-                  <h6>Discount</h6>
-                  <h6>-</h6>
+                  <h6>Discount (10% OFF ) </h6>
+                  <h6>₹{discount}</h6>
                 </div>
                 <div className='d-flex justify-content-between p-2'  >
                   <h6>Taxes and Charges</h6>
-                  <h6>₹199.60</h6>
+                  <h6>₹{taxes}</h6>
                 </div>
                 <div className='d-flex justify-content-between p-2'  >
                   <h6>Grand Total</h6>
-                  <h6>₹3391.60</h6>
+                  <h6> <del className='mr-2 text-danger ' >₹{subTotal + taxes}</del> ₹{grandTotal}</h6>
                 </div>
                 <button className='btn btn-danger btn-block p-2 mt-4  ' >Place Order</button>
               </div>

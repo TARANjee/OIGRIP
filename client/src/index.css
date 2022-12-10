@@ -26,7 +26,9 @@ body {
 .piz2 {
   color: #ebc48a;
 }
-
+.dropdown-toggle{
+  cursor: pointer;
+}
 
 
 /* pizza.js */
@@ -35,12 +37,13 @@ body {
   margin: auto;
   margin-bottom: 3rem;
   max-width: 22rem;
-  transition: transform .2s; 
+  transition: transform .2s;
 }
 
 .card:hover {
   transform: scale(1.1);
 }
+
 /* Banner */
 
 .banner-back {
@@ -105,4 +108,23 @@ body {
   box-shadow: 2px 2px 2px 2px #c1b8b8;
   border-radius: 5px;
   background-color: white;
+}
+
+/* login */
+
+.login {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  background-color: white;
+
+}
+
+form {
+width: 40%;
+  padding: 40px;
+  border: 1px solid black;
 }

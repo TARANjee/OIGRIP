@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import Pizza from '../components/Pizza'
-
 import { getAllPizzas } from '../actions/pizzaAction'
-
+import { GeoLocation} from '../actions/GeoLocation'
 import { useDispatch, useSelector } from 'react-redux'
-import Banner from '../components/Banner'
+import Error from '../components/Error'
+import Loading from '../components/Loading'
 
 const Homescreen = () => {
     const dispatch = useDispatch()
@@ -15,7 +15,8 @@ const Homescreen = () => {
 
     useEffect(() => {
         dispatch(getAllPizzas())
-    }, [])
+        dispatch(GeoLocation())
+    }, [dispatch])
 
 
     return (
@@ -34,21 +35,18 @@ const Homescreen = () => {
 
             <div className='row justify-content-center' >
                 {loading ? (
-                    <h1>Loading..</h1>
+                    <Loading  />
                 ) : error ? (
-                    <h1 className='text-muted' >Something Wrong</h1>
-                ) : (
+                    <Error error='Something Wrong' />
+            ) : (
                     pizzas.map((pizza) => (
-                        <div key={pizza._id} className=' m-3 col-md-3'>
-                            <Pizza pizza={pizza} />
-                        </div>
-                    ))
-                )
-                }
+            <div key={pizza._id} className=' m-3 col-md-3'>
+                <Pizza pizza={pizza} />
             </div>
-
-
-
+            ))
+            )
+                }
+        </div>
         </div >
     )
 }

@@ -31,7 +31,7 @@ const SignUpScreen = () => {
     return (
 
         <div className='login' >
-            <form onSubmit={handleSubmit}>
+            <form className='form' onSubmit={handleSubmit}>
                 <h1 className='text-center' >Sign Up </h1>
                 <div className="form-group mt-5">
                     <label for="exampleInputEmail1">Full Name:</label>

@@ -8,6 +8,7 @@ import SignUpScreen from './screens/SignUpScreen';
 import { useSelector } from 'react-redux';
 import OrdersScreen from './screens/OrdersScreen';
 import 'bootstrap'
+import PaymentSuccess from './screens/PaymentSuccess';
 
 function App() {
   const User = useSelector(state => state.userReducer)
@@ -20,6 +21,7 @@ function App() {
       <Routes >
         <Route path='/' element={<Homescreen />} />
         <Route path='/cart' element={<CartScreen />} />
+        <Route path='/paymentsuccess' element={<PaymentSuccess />} />
         <Route path='/orders' element={currentUser ? <OrdersScreen /> : <Navigate to='/' />} />
         <Route path='/login' element={!currentUser ? <LoginScreen /> : <Navigate to='/' />} />
         <Route path='/register' element={!currentUser ? <SignUpScreen /> : <Navigate to='/' />} />

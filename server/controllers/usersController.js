@@ -28,14 +28,39 @@ const loginUser = async (req, res) => {
             res.send(currentUser).status(200)
         }
         else {
-            return res.status(400).json({ message: ` User Login Failed` })
+            return res.send({ message: ` User Don't Exist. Please Signup` }).status(400)
         }
     } catch (error) {
         res.status(400).json({ message: ` User Login ${error} ` })
     }
 }
+const updateUser = async (req, res) => {
+    const { _id,phoneNo, customerName,address } = req.body
+    try {
+        const user = await User.findByIdAndUpdate( {_id:_id })
+        console.log("-->", user)
+        if (user.length > 0) {
+            const currentUser = {
+                name: user[0].name,
+                email: user[0].email,
+                phoneNo:phoneNo,
+                customerName:customerName,
+                address:address,
+                isAdmin: user[0].isAdmin,
+                _id: user[0]._id
+            }
+            res.send(currentUser).status(200)
+        }
+        else {
+            return res.status(400).json({ message: ` update failed can't find id` })
+        }
+    } catch (error) {
+        res.status(400).json({ message: ` update: ${error} ` })
+    }
+}
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    updateUser
 }

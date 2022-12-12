@@ -19,7 +19,7 @@ export const loginUserAction = (user) => async dispatch => {
 
     try {
         const response = await axios.post('/api/users/login', user)
-        console.log(response)
+        console.log("--->",response)
         dispatch({ type: 'USER_SUCCESS', payload: response.data })
         localStorage.setItem('currentUser', JSON.stringify(response.data))
     } catch (error) {
@@ -30,4 +30,17 @@ export const logoutUserAction = () => async dispatch => {
 
     dispatch({ type: 'USER_LOGOUT_SUCCESS' })
     localStorage.removeItem('currentUser')
+}
+export const UserOrderAction = (user) => async dispatch => {
+
+    dispatch({ type: 'USER_ORDER', payload: user })
+
+    try {
+        const response = await axios.patch('/api/users/update', user)
+        console.log(response)
+        // dispatch({ type: 'USER_ORDER_SUCCESS', payload: response.data })
+        // localStorage.setItem('currentUser', JSON.stringify(response.data))
+    } catch (error) {
+        dispatch({ type: 'USER_ORDER_FAILED', payload: error })
+    }
 }

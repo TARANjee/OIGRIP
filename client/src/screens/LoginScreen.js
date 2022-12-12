@@ -22,7 +22,7 @@ const LoginScreen = () => {
 
     return (
         <div className='login' >
-            <form onSubmit={handleSubmit} className='w-90 d-flex flex-column justify-content-center' >
+            <form onSubmit={handleSubmit} className='form d-flex flex-column justify-content-center' >
                 <h1 className='text-center' >Login </h1>
                 <div className="form-group mt-5">
                     <label for="exampleInputEmail1">Email address</label>
@@ -37,6 +37,7 @@ const LoginScreen = () => {
                 <button className="btn btn-danger mt-4 ">Login</button>
                 <div className="mt-4" >Don't have a account than <Link to='/register'>Sign Up</Link> </div>
             </form>
+            {}
         </div>
     )
 }

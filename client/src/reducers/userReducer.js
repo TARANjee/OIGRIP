@@ -2,60 +2,20 @@ export const userReducer = (state = {}, action) => {
 
     switch (action.type) {
         case 'USER_REQUEST': return {
-            loading: true
+            loading: true,     
         }
-        case 'USER_SUCCESS': return {
+        case 'LOGIN': return {
             loading: false,
-            success: true,
             currentUser: action.payload
+        }
+        case 'LOGOUT': return {
+            currentUser: null
         }
         case 'USER_FAILED': return {
             loading: false,
             error: action.payload
         }
-        case 'USER_LOGOUT_SUCCESS':
-            return {
-                loading: false,
-                success: true,
-                currentUser: null
-            }
-        case 'USER_ORDER':
-            return {
-                success: true,
-                currentUser: action.payload
-            }
-        case 'USER_ORDER_SUCCESS':
-            return {
-                success: true,
-                
-            }
-        case 'USER_ORDER_FAILED':
-            return {
-                success: false,
-                
-            }
-
         default: return state
 
     }
 }
-// export const userLocation = (state = {location:[]}, action) => {
-
-//     switch (action.type) {
-//         case 'USER_LOCATION_REQUEST': return {
-//             loading: true
-//         }
-//         case 'USER_LOCATION_SUCCESS': return {
-//             loading: false,
-//             success: true,
-            
-//         }
-//         case 'USER_LOCATION_FAILED': return {
-//             loading: false,
-//             error: action.payload
-//         }
-        
-//         default: return state
-
-//     }
-// }

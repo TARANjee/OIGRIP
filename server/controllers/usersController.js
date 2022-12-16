@@ -1,66 +1,42 @@
-
 const User = require('../models/userModel')
+const jwt = require('jsonwebtoken')
+
+const createToken = (_id) => {
+    return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
+}
 
 const registerUser = async (req, res) => {
     const { name, password, email } = req.body
 
-
     try {
-        const newUser = await User({ name, password, email })
-        newUser.save()
-        res.send(newUser).status(200)
+        const user = await User.signup(email, password, name)
+
+        // create a token
+
+        const token = createToken(user._id)
+
+        res.status(200).json({ email, token,name })
     } catch (error) {
-        res.status(400).json({ message: `Sorry, No User Found :${error}` })
+        res.status(400).json({ error: error.message })
     }
 }
 const loginUser = async (req, res) => {
     const { email, password } = req.body
+
     try {
-        const user = await User.find({ email, password })
-        console.log("-->", user)
-        if (user.length > 0) {
-            const currentUser = {
-                name: user[0].name,
-                email: user[0].email,
-                isAdmin: user[0].isAdmin,
-                _id: user[0]._id
-            }
-            res.send(currentUser).status(200)
-        }
-        else {
-            return res.send({ message: ` User Don't Exist. Please Signup` }).status(400)
-        }
+        const user = await User.login(email, password)
+
+        // create a token
+        const token = createToken(user._id)
+const name = user.name
+        res.status(200).json({ email, token,name })
     } catch (error) {
-        res.status(400).json({ message: ` User Login ${error} ` })
-    }
-}
-const updateUser = async (req, res) => {
-    const { _id,phoneNo, customerName,address } = req.body
-    try {
-        const user = await User.findByIdAndUpdate( {_id:_id })
-        console.log("-->", user)
-        if (user.length > 0) {
-            const currentUser = {
-                name: user[0].name,
-                email: user[0].email,
-                phoneNo:phoneNo,
-                customerName:customerName,
-                address:address,
-                isAdmin: user[0].isAdmin,
-                _id: user[0]._id
-            }
-            res.send(currentUser).status(200)
-        }
-        else {
-            return res.status(400).json({ message: ` update failed can't find id` })
-        }
-    } catch (error) {
-        res.status(400).json({ message: ` update: ${error} ` })
+        res.status(400).json({ error: error.message })
     }
 }
 
+
 module.exports = {
     registerUser,
-    loginUser,
-    updateUser
+    loginUser
 }

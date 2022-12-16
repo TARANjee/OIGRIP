@@ -23,8 +23,8 @@ function App() {
         <Route path='/cart' element={<CartScreen />} />
         <Route path='/paymentsuccess' element={<PaymentSuccess />} />
         <Route path='/orders' element={currentUser ? <OrdersScreen /> : <Navigate to='/' />} />
-        <Route path='/login' element={!currentUser ? <LoginScreen /> : <Navigate to='/' />} />
-        <Route path='/register' element={!currentUser ? <SignUpScreen /> : <Navigate to='/' />} />
+        <Route path='/login' element={!currentUser || currentUser.error ? <LoginScreen /> : <Navigate to='/' />} />
+        <Route path='/register' element={!currentUser || currentUser.error ? <SignUpScreen /> : <Navigate to='/' />} />
       </Routes>
     </BrowserRouter>
   );

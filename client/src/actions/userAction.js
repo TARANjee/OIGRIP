@@ -1,34 +1,55 @@
 import axios from 'axios'
 
-export const registerUserAction = (user) => async dispatch => {
-
+export const registerUserAction = ({ name, email, password }) => async dispatch => {
+    console.log({ name, email, password })
     dispatch({ type: 'USER_REQUEST' })
 
     try {
-        const response = await axios.post('/api/users/register', user)
-        console.log(response)
-        dispatch({ type: 'USER_SUCCESS', payload: response.data })
-        localStorage.setItem('currentUser', JSON.stringify(response.data))
+        const response = await fetch('/api/users/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, name })
+        })
+        const data = await response.json()
+        console.log(data)
+        if (!response.ok) {
+            dispatch({ type: 'USER_FAILED', payload: data })
+        }
+        if (response.ok) {
+            dispatch({ type: 'LOGIN', payload: data })
+            localStorage.setItem('currentUser', JSON.stringify(data))
+        }
+
     } catch (error) {
         dispatch({ type: 'USER_FAILED', payload: error })
     }
 }
-export const loginUserAction = (user) => async dispatch => {
+export const loginUserAction = ({ email, password }) => async dispatch => {
 
     dispatch({ type: 'USER_REQUEST' })
 
     try {
-        const response = await axios.post('/api/users/login', user)
-        console.log("--->",response)
-        dispatch({ type: 'USER_SUCCESS', payload: response.data })
-        localStorage.setItem('currentUser', JSON.stringify(response.data))
+        const response = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        })
+        const data = await response.json()
+        console.log(data)
+        if (!response.ok) {
+            dispatch({ type: 'USER_FAILED', payload: data })
+        }
+        if (response.ok) {
+            dispatch({ type: 'LOGIN', payload: data })
+            localStorage.setItem('currentUser', JSON.stringify(data))
+        }
     } catch (error) {
         dispatch({ type: 'USER_FAILED', payload: error })
     }
 }
 export const logoutUserAction = () => async dispatch => {
 
-    dispatch({ type: 'USER_LOGOUT_SUCCESS' })
+    dispatch({ type: 'LOGOUT' })
     localStorage.removeItem('currentUser')
 }
 export const UserOrderAction = (user) => async dispatch => {

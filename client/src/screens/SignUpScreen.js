@@ -11,8 +11,8 @@ const SignUpScreen = () => {
     const dispatch = useDispatch()
     const userState = useSelector(state => state.userReducer)
 
-    const { error ,loading} = userState
-    console.log(error)
+    const { error ,loading,msg} = userState
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (password !== cPassword) {
@@ -34,6 +34,7 @@ const SignUpScreen = () => {
             <form className='form' onSubmit={handleSubmit}>
                 <h1 className='text-center' >Sign Up </h1>
                 {error && <div className='mt-5 p-2 h6 text-danger border border-danger'>{error.error}</div>}
+                {msg && <div className='mt-5 p-2 h6 text-success border border-success'>{msg.msg}</div>}
 
                 <div className="form-group mt-4">
                     <label for="exampleInputEmail1 ">Full Name:</label>

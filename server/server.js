@@ -5,13 +5,15 @@ const pizzasRoute = require('./routes/pizzaRoutes')
 const userRoute = require('./routes/userRoute')
 const paymentRoute = require('./routes/paymentRoute')
 const Razorpay = require('razorpay')
+const cookieParser = require('cookie-parser')
+
 //express app
 const app = express();
 
 // middleware
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
+app.use(cookieParser())
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();

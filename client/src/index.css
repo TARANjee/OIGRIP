@@ -26,7 +26,8 @@ body {
 .piz2 {
   color: #ebc48a;
 }
-.dropdown-toggle{
+
+.dropdown-toggle {
   cursor: pointer;
 }
 
@@ -113,7 +114,6 @@ body {
 /* login */
 
 .login {
- 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,10 +122,16 @@ body {
 }
 
 .form {
-  
-max-width:500px;
+  width: 400px;
   padding: 40px;
-  border-radius:4px ;
-  margin: auto;
+  border-radius: 4px;
   box-shadow: 2px 2px 2px 2px #c1b8b8;
+  background-color: white;
+}
+
+/* forgot-password */
+.forgot {
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
 }

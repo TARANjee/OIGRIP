@@ -15,6 +15,18 @@ export const userReducer = (state = {}, action) => {
             loading: false,
             error: action.payload
         }
+        case 'USER_FORGOT': return {
+            loading: false,
+            msg: action.payload
+        }
+        case 'USER_ACTIVATION': return {
+            loading: false,
+            msg: action.payload
+        }
+        case 'USER_RESET': return {
+            loading: false,
+            msg: action.payload
+        }
         default: return state
 
     }
